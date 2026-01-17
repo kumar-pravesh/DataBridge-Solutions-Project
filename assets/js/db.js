@@ -106,6 +106,70 @@ class DataBridgeDB {
         localStorage.setItem('db_messages', JSON.stringify(msgs));
     }
 
+    // --- USERS & AUTH ---
+    initAuth() {
+        if (!localStorage.getItem('db_users')) {
+            localStorage.setItem('db_users', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('db_current_user')) {
+            localStorage.setItem('db_current_user', null);
+        }
+    }
+
+    getUsers() {
+        return JSON.parse(localStorage.getItem('db_users'));
+    }
+
+    register(userData) {
+        const users = this.getUsers();
+        if (users.find(u => u.email === userData.email)) {
+            throw new Error("User with this email already exists.");
+        }
+        userData.id = Date.now();
+        users.push(userData);
+        localStorage.setItem('db_users', JSON.stringify(users));
+        return userData;
+    }
+
+    login(email, password) {
+        const users = this.getUsers();
+        const user = users.find(u => u.email === email && u.password === password);
+        if (!user) {
+            throw new Error("Invalid email or password.");
+        }
+        localStorage.setItem('db_current_user', JSON.stringify(user));
+        return user;
+    }
+
+    loginWithGoogle() {
+        // Simulate a successful Google OAuth flow
+        const googleUser = {
+            id: 'google_' + Date.now(),
+            name: "Google User",
+            email: "google.user@gmail.com",
+            method: 'google'
+        };
+
+        // Save to users if not exists (mock)
+        const users = this.getUsers();
+        if (!users.find(u => u.email === googleUser.email)) {
+            users.push(googleUser);
+            localStorage.setItem('db_users', JSON.stringify(users));
+        }
+
+        localStorage.setItem('db_current_user', JSON.stringify(googleUser));
+        return googleUser;
+    }
+
+    logout() {
+        localStorage.setItem('db_current_user', null);
+    }
+
+    getCurrentUser() {
+        const user = localStorage.getItem('db_current_user');
+        return user ? JSON.parse(user) : null;
+    }
+
     // --- STATS ---
     getStats() {
         const jobs = this.getJobs();
@@ -115,7 +179,7 @@ class DataBridgeDB {
             totalJobs: jobs.length,
             totalApplications: apps.length,
             totalMessages: msgs.length,
-            recentActivity: [...apps.map(a => ({...a, type: 'Application'})), ...msgs.map(m => ({...m, type: 'Message'}))]
+            recentActivity: [...apps.map(a => ({ ...a, type: 'Application' })), ...msgs.map(m => ({ ...m, type: 'Message' }))]
                 .sort((a, b) => b.id - a.id)
                 .slice(0, 5)
         };
@@ -124,3 +188,4 @@ class DataBridgeDB {
 
 // Export instance
 window.db = new DataBridgeDB();
+window.db.initAuth(); // Initialize auth-related storage
