@@ -172,10 +172,9 @@
                         title="Toggle Dark Mode">
                         🌙
                     </button>
-                    <a href="./contactus.html"
-                        class="hidden sm:flex items-center justify-center cta-sweep bg-primary hover:bg-primary/90 text-white text-sm font-bold h-11 px-6 rounded-lg transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95">
-                        Get a Quote
-                    </a>
+                    <div id="auth-buttons" class="hidden sm:flex items-center gap-3">
+                        <!-- Populated by assets/js/nav-auth.js -->
+                    </div>
                     <button id="mobile-menu-btn"
                         class="lg:hidden p-2 text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors"
                         onclick="toggleMobileMenu()">
@@ -443,59 +442,62 @@
                     <p class="text-sm text-[#617289] dark:text-gray-400 font-medium">
                         © 2026 DataBridge Solutions Inc. All rights reserved.
                     </p>
-                    <div class="flex flex-wrap justify-center gap-8">
+                    <div class="flex flex-wrap justify-center gap-8 md:pr-20">
                         <a class="text-sm text-[#617289] dark:text-gray-400 hover:text-primary dark:hover:text-accent-cyan transition-colors font-medium"
                             href="./assets/terms& conditions/terms-and-conditions-template.pdf">Privacy Policy</a>
                         <a class="text-sm text-[#617289] dark:text-gray-400 hover:text-primary dark:hover:text-accent-cyan transition-colors font-medium"
                             href="./assets/terms& conditions/terms-and-conditions-template.pdf">Terms of Service</a>
+                        <a class="text-sm text-[#617289] dark:text-gray-400 hover:text-primary dark:hover:text-accent-cyan transition-colors font-medium"
+                            href="admin/login.html">Admin Login</a>
                     </div>
                 </div>
             </div>
         </footer>
-    </div>
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu"
-        class="fixed inset-0 z-[100] bg-white/95 dark:bg-[#101822]/95 backdrop-blur-xl transition-all duration-300 translate-x-full lg:hidden flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none">
-        <button onclick="toggleMobileMenu()"
-            class="absolute top-6 right-6 p-2 text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">
-            <span class="material-symbols-outlined text-4xl">close</span>
-        </button>
 
-        <nav class="flex flex-col items-center gap-8">
-            <a href="./index.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Home</a>
-            <a href="./aboutUs.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">About
-                Us</a>
-            <a href="./services.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Services</a>
-            <a href="./industries.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Industries</a>
-            <a href="./careers.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Careers</a>
-            <a href="./contactus.html" onclick="toggleMobileMenu()"
-                class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Contact</a>
-        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[100] bg-white/95 dark:bg-[#101822]/95 backdrop-blur-xl transition-all duration-300 translate-x-full lg:hidden flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none">
+            <button onclick="toggleMobileMenu()"
+                class="absolute top-6 right-6 p-2 text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">
+                <span class="material-symbols-outlined text-4xl">close</span>
+            </button>
 
-        <button
-            class="mt-8 cta-sweep bg-primary hover:bg-primary/90 text-white text-lg font-bold h-14 px-10 rounded-xl transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95">
-            Get a Quote
-        </button>
-    </div>
+            <nav class="flex flex-col items-center gap-8">
+                <a href="./index.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Home</a>
+                <a href="./aboutUs.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">About
+                    Us</a>
+                <a href="./services.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Services</a>
+                <a href="./industries.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Industries</a>
+                <a href="./careers.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Careers</a>
+                <a href="./contactus.html" onclick="toggleMobileMenu()"
+                    class="text-3xl font-bold text-[#111418] dark:text-white hover:text-primary dark:hover:text-accent-cyan transition-colors">Contact</a>
+            </nav>
 
-    <script>
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle("dark");
-        }
+            <div id="mobile-auth-buttons" class="mt-8 flex flex-col items-center gap-4 w-full px-6">
+                <!-- Populated by assets/js/nav-auth.js -->
+            </div>
+        </div>
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
-            menu.classList.toggle('opacity-0');
-            menu.classList.toggle('pointer-events-none');
-            document.body.classList.toggle('overflow-hidden');
-        }
-    </script>
+        <script>
+            function toggleDarkMode() {
+                document.documentElement.classList.toggle("dark");
+            }
+
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('translate-x-full');
+                menu.classList.toggle('opacity-0');
+                menu.classList.toggle('pointer-events-none');
+                document.body.classList.toggle('overflow-hidden');
+            }
+        </script>
+        <script src="./assets/js/db.js"></script>
+        <script src="./assets/js/nav-auth.js"></script>
 </body>
 
 </html>
